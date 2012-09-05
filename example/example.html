@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Knockout Select</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="libs/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Knockout Select</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Knockout Select!</h1>
+        <p>Bringing simple queries to knockout.</p>
+        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="span12">
+          <h2>About</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <div class="span12">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+       </div>
+        <div class="offset1 span6">
+          <h2>Examples</h2>
+          
+          <h3>Simple Path</h3>
+          <p>vm.exampleSelect = ko.select(vm, "a.b.c");</p>
+
+          <h3>Path to Array Index</h3>
+          <p>vm.exampleSelect = ko.select(vm, "a.b.c[1]");</p>
+          
+          <h3>Path to negative Array Index</h3>
+          <p>vm.exampleSelect = ko.select(vm, "a.b.c[-1]");</p>
+
+          <h3>Filter an array</h3>
+          <p>vm.exampleSelect = ko.select(vm, "project.users{name=dennis}");</p>
+
+          <h3>Filter an array, based on sub properties</h3>
+          <p>vm.exampleSelect = ko.select(vm, "project.documents{owner.name=dennis}");</p>
+
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="libs/knockout.js"></script>
+    <script src="../src/knockout-select.js"></script>
+
+    <script>   
+      // Create a View Model with an observable 
+      var vm = { 
+        a : ko.observable() 
+      };
+
+      // create an example select rule
+      //
+      // TODO: Reword to be more understandable
+      //   get the first element of teh array c of property b of proprety a
+      // 
+
+      vm.exampleSelect = ko.select(vm, "a.b.c[1]");
+      vm.exampleSelect.subscribe(function (newValue) {
+         console.log('new value of select', newValue);
+      })
+
+      // modify the view model until the path resolves.
+      vm.a({b:0}) 
+      vm.a({b:{c:[]}})
+      vm.a({b:ko.observable()})
+      vm.a().b({c:ko.observableArray([0,1,2,3])})
+
+
+
+    </script>
+  </body>
+</html>
